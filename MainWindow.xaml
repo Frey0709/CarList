@@ -1,0 +1,84 @@
+﻿<Window x:Class="CarList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarList"
+        mc:Ignorable="d"
+        Title="Car Inventory" MinHeight="360" MinWidth="270" Height="450" Width="500">
+    <StackPanel>
+        
+        <!-- Item 1: The Input Grid -->
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition MinWidth="50" Width="100"/>
+            <ColumnDefinition MinWidth="70" Width="100" MaxWidth="300"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!-- Make is a combo box -->
+        <!-- Row 0 -->
+        <Label Content="_Make:" Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=comboMake}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <ComboBox x:Name="comboMake" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Top" Width="120" ToolTip="Select the manufacturer of the car">
+                <ComboBoxItem Content="BMW"/>
+                <ComboBoxItem Content="Honda"/>
+                <ComboBoxItem Content="Hyundai"/>
+                <ComboBoxItem Content="Ford"/>
+                <ComboBoxItem Content="Dodge"/>
+                <ComboBoxItem Content="Ferrari"/>
+                <ComboBoxItem Content="Porshe"/>
+                <ComboBoxItem Content="Rolls Royce"/>
+                <ComboBoxItem Content="Kia"/>
+                <ComboBoxItem Content="Lamborghini"/>
+                <ComboBoxItem Content="DMC"/>
+            </ComboBox>
+            <!-- <TextBox x:Name="textMake" IsReadOnly="True" MinWidth="60" Grid.Row="0" Grid.Column="2"  Margin="5" ToolTip="Displays the make of the car." VerticalContentAlignment="Center"/>-->
+        <!-- Row 1 -->
+        <Label Content="M_odel:" Grid.Row="1" Grid.Column="1" Target="{Binding ElementName=textModel}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox x:Name="textModel" IsReadOnly="True" MinWidth="60" Grid.Row="1" Grid.Column="2" Margin="5" ToolTip="Displays the model of the car" VerticalContentAlignment="Center"/>
+        <!-- Row 2 -->
+        <Label Content="_Year:" Grid.Row="2" Grid.Column="1" Target="{Binding ElementName=comboYear}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <ComboBox x:Name="comboYear" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Top" Width="120" ToolTip="Select the year the car was produced">
+                
+            </ComboBox>
+            <!--<TextBox x:Name="textYear" IsReadOnly="True" MinWidth="60" Grid.Row="2" Grid.Column="2" Margin="5" ToolTip="Displays the year of the car" VerticalContentAlignment="Center"/>-->
+        <!-- Row 3 -->
+        <Label Content="_Price:" Grid.Row="3" Grid.Column="1" Target="{Binding ElementName=textPrice}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox x:Name="textPrice" IsReadOnly="True" MinWidth="60" Grid.Row="3" Grid.Column="2" Margin="5" ToolTip="Displays the price of the car" VerticalContentAlignment="Center"/>
+        <!-- Row 4 -->
+            <CheckBox x:Name="checkIsNew" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="4" Content="_New?" />
+        </Grid>
+
+        <!-- Item 2: The ListBox -->
+
+        <ListView x:Name="listViewCars" Margin="3" MinHeight="120">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding IsNew}" Width="30" Header="New?"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding IdentificationNumber}" Width="20" Header="ID" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Make}" Width="60" Header="Make"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Width="60" Header="Model"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Year}" Width="35" Header="Year"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="60" Header="Price"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Item 3: Big Output Area -->
+        <TextBox x:Name="textOutput" IsEnabled="False" Margin="3" Background="Gray" MinHeight="50" ToolTip="Displays output and status messages"/>
+
+        <!-- Item 4: Buttons at the bottom -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="buttonEnter" Content="_Enter" MinWidth="45" Margin="5" ToolTip="Click to enter your car"/>
+            <Button x:Name="buttonReset" Content="_Reset" MinWidth="45" Margin="5" ToolTip="Click to reset the car entry form"/>
+            <Button x:Name="buttonExit" Content="E_xit" MinWidth="45" Margin="5" ToolTip="Click to exit the program"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
