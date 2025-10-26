@@ -77,8 +77,8 @@
         <!-- Item 4: Buttons at the bottom -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button x:Name="buttonEnter" Content="_Enter" MinWidth="45" Margin="5" ToolTip="Click to enter your car"/>
-            <Button x:Name="buttonReset" Content="_Reset" MinWidth="45" Margin="5" ToolTip="Click to reset the car entry form"/>
-            <Button x:Name="buttonExit" Content="E_xit" MinWidth="45" Margin="5" ToolTip="Click to exit the program"/>
+            <Button x:Name="buttonReset" Content="_Reset" MinWidth="45" Margin="5" ToolTip="Click to reset the car entry form" Click="ResetClick"/>
+            <Button x:Name="buttonExit" Content="E_xit" MinWidth="45" Margin="5" ToolTip="Click to exit the program" Click="ExitClick"/>
         </StackPanel>
     </StackPanel>
 </Window>

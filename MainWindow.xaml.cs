@@ -53,5 +53,23 @@ namespace CarList
 
             comboMake.Focus();
         }
+        /// <summary>
+        /// When Reset is clicked, reset stuff.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetClick(object sender, RoutedEventArgs e)
+        {
+            SetDefaults();
+        }
+        /// <summary>
+        /// Me close form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
