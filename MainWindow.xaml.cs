@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿// Author: Claude Joeffrey Aldenson R. De Guzman
+// Created: Oct 26, 2025
+
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -71,5 +74,8 @@ namespace CarList
         {
             Close();
         }
+
+        
+        
     }
 }

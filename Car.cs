@@ -1,6 +1,6 @@
 ﻿// Author:  Brendan Obilo & Kyle Chapman
-// Created at:    October 18, 2024
-// Modified at:  October 1, 2025
+// Created at:    October 18, 2025
+// Modified at:  October 26, 2025
 // Description:
 // A class that deals with the input from user. The input includes, Car’s make (or manufacturer),
 // model, year, colour, price, and whether it is new or not (as a Boolean).
@@ -50,7 +50,7 @@ namespace CarList
         /// <returns>A string version of the Car.</returns>
         public override string ToString()
         {
-            return Year + " " + Make + " " + Model + " (Car)";
+            return $"{IdentificationNumber} " + Year + " " + Make + " " + Model + Price + " (Car)";
         }
 
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CarList"
         mc:Ignorable="d"
-        Title="Car Inventory" MinHeight="360" MinWidth="270" Height="450" Width="500">
+        Title="Car Inventory" WindowStartupLocation="CenterScreen" MinHeight="360" MinWidth="300" Height="450" Width="500">
     <StackPanel>
         
         <!-- Item 1: The Input Grid -->
@@ -42,7 +42,7 @@
             <!-- <TextBox x:Name="textMake" IsReadOnly="True" MinWidth="60" Grid.Row="0" Grid.Column="2"  Margin="5" ToolTip="Displays the make of the car." VerticalContentAlignment="Center"/>-->
         <!-- Row 1 -->
         <Label Content="M_odel:" Grid.Row="1" Grid.Column="1" Target="{Binding ElementName=textModel}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox x:Name="textModel" IsReadOnly="True" MinWidth="60" Grid.Row="1" Grid.Column="2" Margin="5" ToolTip="Displays the model of the car" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="textModel" IsReadOnly="False" MinWidth="60" Grid.Row="1" Grid.Column="2" Margin="5" ToolTip="Displays the model of the car" VerticalContentAlignment="Center"/>
         <!-- Row 2 -->
         <Label Content="_Year:" Grid.Row="2" Grid.Column="1" Target="{Binding ElementName=comboYear}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <ComboBox x:Name="comboYear" Grid.Column="2" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Top" Width="120" ToolTip="Select the year the car was produced">
@@ -51,7 +51,7 @@
             <!--<TextBox x:Name="textYear" IsReadOnly="True" MinWidth="60" Grid.Row="2" Grid.Column="2" Margin="5" ToolTip="Displays the year of the car" VerticalContentAlignment="Center"/>-->
         <!-- Row 3 -->
         <Label Content="_Price:" Grid.Row="3" Grid.Column="1" Target="{Binding ElementName=textPrice}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <TextBox x:Name="textPrice" IsReadOnly="True" MinWidth="60" Grid.Row="3" Grid.Column="2" Margin="5" ToolTip="Displays the price of the car" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="textPrice" IsReadOnly="False" MinWidth="60" Grid.Row="3" Grid.Column="2" Margin="5" ToolTip="Displays the price of the car" VerticalContentAlignment="Center"/>
         <!-- Row 4 -->
             <CheckBox x:Name="checkIsNew" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="4" Content="_New?" />
         </Grid>
@@ -76,7 +76,7 @@
 
         <!-- Item 4: Buttons at the bottom -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button x:Name="buttonEnter" Content="_Enter" MinWidth="45" Margin="5" ToolTip="Click to enter your car"/>
+            <Button x:Name="buttonEnter" Content="_Enter" MinWidth="45" Margin="5" ToolTip="Click to enter your car" Click="EnterClick"/>
             <Button x:Name="buttonReset" Content="_Reset" MinWidth="45" Margin="5" ToolTip="Click to reset the car entry form" Click="ResetClick"/>
             <Button x:Name="buttonExit" Content="E_xit" MinWidth="45" Margin="5" ToolTip="Click to exit the program" Click="ExitClick"/>
         </StackPanel>
