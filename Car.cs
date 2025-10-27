@@ -19,6 +19,7 @@ namespace CarList
 
         /// <summary>
         /// A default constructor
+        /// Kyle code
         /// </summary>
         public Car() : base()
         {
@@ -28,6 +29,7 @@ namespace CarList
         /// <summary>
         /// A parameterized constructor that accepts various paramterized
         /// And sets them to the private variables
+        /// Kyle code
         /// </summary>
         /// <param name="carMake"> The make of the car entered by user</param>
         /// <param name="carModel"> The model of the car entered by user</param>
@@ -46,6 +48,7 @@ namespace CarList
 
         /// <summary>
         /// Returns a string version of the Car.
+        /// Kyle code
         /// </summary>
         /// <returns>A string version of the Car.</returns>
         public override string ToString()
