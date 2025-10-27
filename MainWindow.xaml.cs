@@ -22,9 +22,10 @@ namespace CarList
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// List to store all cars
+        /// List to store all cars / Constants
         /// </summary>
         private List<Car> carList = new List<Car>();
+        private const int YEAR_RANGE = 50; 
         /// <summary>
         /// Kyle code
         /// Constructor fir the form.
@@ -43,7 +44,7 @@ namespace CarList
         {
             var currentYear = DateTime.Now.Year;
 
-            for (int year = currentYear; year >= currentYear - 50; year--)
+            for (int year = currentYear; year >= currentYear - YEAR_RANGE; year--)
             {
                 comboYear.Items.Add(year);
             }
