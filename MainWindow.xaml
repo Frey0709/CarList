@@ -61,10 +61,10 @@
         <ListView x:Name="listViewCars" Margin="3" MinHeight="120">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding IsNew}" Width="30" Header="New?"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding IdentificationNumber}" Width="20" Header="ID" />
+                    <GridViewColumn DisplayMemberBinding="{Binding IsNew}" Width="40" Header="New?"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding IdentificationNumber}" Width="40" Header="ID" />
                     <GridViewColumn DisplayMemberBinding="{Binding Make}" Width="60" Header="Make"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Width="60" Header="Model"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Model}" Width="100" Header="Model"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Year}" Width="35" Header="Year"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Price}" Width="60" Header="Price"/>
                 </GridView>
