@@ -7,44 +7,44 @@
         mc:Ignorable="d"
         Title="Car Inventory" WindowStartupLocation="CenterScreen" MinHeight="410" MinWidth="350" Height="470" Width="500">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <!-- TabControl takes remaining space -->
-            <RowDefinition Height="Auto"/>
-            <!-- StatusBar fixed at bottom -->
-        </Grid.RowDefinitions>
 
-        <!-- Main Tabs -->
-        <TabControl x:Name="tabControlMain" Grid.Row="0" Margin="5" SelectionChanged="TabControl_SelectionChanged">
+        <!-- Main TabControl -->
+        <TabControl x:Name="tabControlMain" SelectionChanged="TabControl_SelectionChanged" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
             <!-- Tab 1: Add Vehicles -->
             <TabItem Header="Add Vehicles">
                 <StackPanel Margin="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition MinWidth="50" Width="100"/>
-                            <ColumnDefinition MinWidth="70" Width="150" MaxWidth="300"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
+                        <!-- Vehicle Type -->
+                        <Label Content="_Type:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="comboVehicleType" Grid.Row="0" Grid.Column="1" Width="120" Margin="5" SelectedIndex="0" ToolTip="Select the type of vehicle">
+                            <ComboBoxItem Content="Car"/>
+                            <ComboBoxItem Content="Motorcycle"/>
+                        </ComboBox>
+
                         <!-- Make -->
-                        <Label Content="_Make:" Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=comboMake}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="comboMake" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="120" ToolTip="Select the manufacturer of the vehicle" TabIndex="1">
+                        <Label Content="_Make:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="comboMake" Grid.Row="1" Grid.Column="1" Width="120" Margin="5" ToolTip="Select the manufacturer of the vehicle">
                             <ComboBoxItem Content="BMW"/>
                             <ComboBoxItem Content="Honda"/>
                             <ComboBoxItem Content="Hyundai"/>
                             <ComboBoxItem Content="Ford"/>
                             <ComboBoxItem Content="Dodge"/>
                             <ComboBoxItem Content="Ferrari"/>
-                            <ComboBoxItem Content="Porsche"/>
+                            <ComboBoxItem Content="Porshe"/>
                             <ComboBoxItem Content="Rolls Royce"/>
                             <ComboBoxItem Content="Kia"/>
                             <ComboBoxItem Content="Lamborghini"/>
@@ -52,26 +52,26 @@
                         </ComboBox>
 
                         <!-- Model -->
-                        <Label Content="M_odel:" Grid.Row="1" Grid.Column="1" Target="{Binding ElementName=textModel}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <TextBox x:Name="textModel" Grid.Row="1" Grid.Column="2" Margin="5" VerticalContentAlignment="Center" ToolTip="Enter the vehicle model" TabIndex="2"/>
+                        <Label Content="M_odel:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox x:Name="textModel" Grid.Row="2" Grid.Column="1" Margin="5" ToolTip="Enter the model of the vehicle"/>
 
                         <!-- Year -->
-                        <Label Content="_Year:" Grid.Row="2" Grid.Column="1" Target="{Binding ElementName=comboYear}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="comboYear" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="120" ToolTip="Select the year the vehicle was produced" TabIndex="3"/>
+                        <Label Content="_Year:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="comboYear" Grid.Row="3" Grid.Column="1" Width="120" Margin="5" ToolTip="Select the year of the vehicle"/>
 
                         <!-- Price -->
-                        <Label Content="_Price:" Grid.Row="3" Grid.Column="1" Target="{Binding ElementName=textPrice}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <TextBox x:Name="textPrice" Grid.Row="3" Grid.Column="2" Margin="5" VerticalContentAlignment="Center" ToolTip="Enter the price of the vehicle" TabIndex="4"/>
+                        <Label Content="_Price:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox x:Name="textPrice" Grid.Row="4" Grid.Column="1" Margin="5" ToolTip="Enter the price of the vehicle"/>
 
                         <!-- Is New -->
-                        <CheckBox x:Name="checkIsNew" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Center" Content="_New?" TabIndex="5"/>
+                        <CheckBox x:Name="checkIsNew" Grid.Row="5" Grid.Column="1" Content="_New?" HorizontalAlignment="Left" Margin="5"/>
                     </Grid>
 
                     <!-- Buttons -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                        <Button x:Name="buttonEnter" Content="_Enter" MinWidth="60" Margin="5" ToolTip="Click to enter your vehicle" Click="EnterClick" TabIndex="6"/>
-                        <Button x:Name="buttonReset" Content="_Reset" MinWidth="60" Margin="5" ToolTip="Click to reset the form" Click="ResetClick" TabIndex="7"/>
-                        <Button x:Name="buttonExit" Content="E_xit" MinWidth="60" Margin="5" ToolTip="Click to exit the program" Click="ExitClick" TabIndex="8"/>
+                        <Button x:Name="buttonEnter" Content="_Enter" MinWidth="60" Margin="5" Click="EnterClick" ToolTip="Click to enter your vehicle"/>
+                        <Button x:Name="buttonReset" Content="_Reset" MinWidth="60" Margin="5" Click="ResetClick" ToolTip="Click to reset the form"/>
+                        <Button x:Name="buttonExit" Content="E_xit" MinWidth="60" Margin="5" Click="ExitClick" ToolTip="Click to exit the program"/>
                     </StackPanel>
 
                     <!-- Output box for messages -->
@@ -81,10 +81,10 @@
 
             <!-- Tab 2: Vehicle List -->
             <TabItem Header="Vehicle List">
-                <ListView x:Name="listViewCars" Margin="5" MinHeight="150">
+                <ListView x:Name="listViewCars" Margin="5" MinHeight="150" SelectionChanged="CarSelect">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Type}" Width="60" Header="Type"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Type}" Width="80" Header="Type"/>
                             <GridViewColumn DisplayMemberBinding="{Binding IdentificationNumber}" Width="40" Header="ID"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Make}" Width="100" Header="Make"/>
                             <GridViewColumn DisplayMemberBinding="{Binding Model}" Width="100" Header="Model"/>
@@ -106,9 +106,11 @@
             </TabItem>
         </TabControl>
 
-        <!-- Status bar at bottom -->
-        <StatusBar Grid.Row="1">
-            <StatusBarItem x:Name="statusMessage" HorizontalAlignment="Stretch" Content="No status to report"/>
+        <!-- Status Bar -->
+        <StatusBar VerticalAlignment="Bottom" Height="25">
+            <StatusBarItem HorizontalAlignment="Stretch">
+                <TextBlock x:Name="statusMessage" Text="No Status to report"/>
+            </StatusBarItem>
         </StatusBar>
 
     </Grid>

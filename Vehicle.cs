@@ -1,18 +1,14 @@
 ﻿// Author: Claude Joeffrey Aldenson R. De Guzman
 // Created: Oct 26, 2025
+// Updated: Nov 16, 2025
 // Description: Defines a generic vehicle to be inherited by different vehicle types.
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarList
 {
     internal abstract class Vehicle
     {
         // Declared and initialized Variables
-        // Kyle code
         protected string make = String.Empty;
         protected string model = String.Empty;
         protected int year = DateTime.Now.Year;
@@ -23,7 +19,7 @@ namespace CarList
         protected int id = count;
 
         /// <summary>
-        /// A default constructor
+        /// Default constructor
         /// Kyle code
         /// </summary>
         public Vehicle()
@@ -32,66 +28,70 @@ namespace CarList
             id = count;
         }
 
-
-
         /// <summary>
-        /// An accessor that returns the make of the car
+        /// Vehicle make
         /// Kyle code
         /// </summary>
-        /// <returns></returns>
         public string Make { get { return make; } set { make = value; } }
 
         /// <summary>
-        /// An accessor that returns the model of the car
+        /// Vehicle model
         /// Kyle code
         /// </summary>
-        /// <returns></returns>
         public string Model { get { return model; } set { model = value; } }
 
         /// <summary>
-        /// An accessor that returns the year of the car
+        /// Vehicle year
         /// Kyle code
         /// </summary>
-        /// <returns></returns>
         public int Year { get { return year; } set { year = value; } }
 
         /// <summary>
-        /// An accessor that returns the colour of the car
+        /// Vehicle price
         /// Kyle code
         /// </summary>
-        /// <returns></returns>
         public decimal Price { get { return price; } set { price = value; } }
 
         /// <summary>
-        /// An accessor that returns the if the car is new or old
+        /// Is the vehicle new
         /// Kyle code
         /// </summary>
-        /// <returns></returns>
         public bool IsNew { get { return isNew; } set { isNew = value; } }
 
         /// <summary>
-        /// An accessor that returns the car's unique identification number
+        /// Vehicle unique ID
         /// Kyle code
         /// </summary>
-        /// <returns></returns>
         public int IdentificationNumber { get { return id; } }
 
         /// <summary>
-        /// returns the number of vehicles created
+        /// Total number of vehicles
         /// Kyle code
         /// </summary>
-        /// <returns></returns>
-        public static int Count{ get { return count; } }
-
+        public static int Count { get { return count; } }
 
         /// <summary>
-        /// Returns a string version of the Vehicle.
+        /// Vehicle type for inheritance differentiation
         /// Kyle code
         /// </summary>
-        /// <returns>A string version of the Vehicle.</returns>
+        public abstract string Type { get; }
+
+        /// <summary>
+        /// Returns a string version of the Vehicle
+        /// Kyle code
+        /// </summary>
         public override string ToString()
         {
             return Year + " " + Make + " " + Model;
+        }
+
+        /// <summary>
+        /// Vehicle honk method, can be overridden
+        /// Kyle code
+        /// </summary>
+        public virtual string Honk()
+        {
+            return "Beep beep!";
         }
     }
 }

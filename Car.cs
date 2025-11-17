@@ -1,60 +1,45 @@
-﻿// Author:  Brendan Obilo & Kyle Chapman
-// Created at:    October 18, 2025
-// Modified at:  October 26, 2025
-// Description:
-// A class that deals with the input from user. The input includes, Car’s make (or manufacturer),
-// model, year, colour, price, and whether it is new or not (as a Boolean).
-// It Uses this parameters and adds to the car list that displays on the textBlock.
-// Created by inheriting the Vehicle class.
+﻿// Author: Claude Joeffrey Aldenson R. De Guzman
+// Created: Oct 26, 2025
+// Description: Defines a Car class that inherits from Vehicle.
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarList
 {
     internal class Car : Vehicle
     {
-
         /// <summary>
-        /// A default constructor
+        /// Default constructor
         /// Kyle code
         /// </summary>
-        public Car() : base()
-        {
+        public Car() : base() { }
 
+        /// <summary>
+        /// Parametrized constructor
+        /// Kyle code
+        /// </summary>
+        public Car(string make, string model, int year, decimal price, bool isNew)
+        {
+            Make = make;
+            Model = model;
+            Year = year;
+            Price = price;
+            IsNew = isNew;
         }
 
         /// <summary>
-        /// A parameterized constructor that accepts various paramterized
-        /// And sets them to the private variables
+        /// Vehicle type
         /// Kyle code
         /// </summary>
-        /// <param name="carMake"> The make of the car entered by user</param>
-        /// <param name="carModel"> The model of the car entered by user</param>
-        /// <param name="carYear"> The Year the car was made as entered by user</param>
-        /// <param name="carPrice"> The price of the car as entered by the user</param>
-        /// <param name="isCarNew"> A parameter than determines if the car is new or not</param>
-        public Car(string carMake, string carModel, int carYear, decimal carPrice, bool isCarNew) : base()
-        {
-
-            make = carMake;
-            model = carModel;
-            year = carYear;
-            price = carPrice;
-            isNew = isCarNew;
-        }
+        public override string Type => "Car";
 
         /// <summary>
-        /// Returns a string version of the Car.
+        /// Car-specific honk
         /// Kyle code
         /// </summary>
-        /// <returns>A string version of the Car.</returns>
-        public override string ToString()
+        public override string Honk()
         {
-            return $"{IdentificationNumber} " + Year + " " + Make + " " + Model + Price + " (Car)";
+            return "Car goes beep!";
         }
-
     }
 }

@@ -1,18 +1,14 @@
 ﻿// Author: Claude Joeffrey Aldenson R. De Guzman | Kyle Chapman
 // Created: Oct 26, 2025
-// Description: Backend of the Car Inventory application, that will handle events and methods for user inputs and displaying them.
+// Description: Backend of the Car Inventory application, that handles events and methods for user inputs and displaying them.
 
-using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Globalization;
 
 namespace CarList
 {
@@ -21,185 +17,210 @@ namespace CarList
     /// </summary>
     public partial class MainWindow : Window
     {
-        /// <summary>
-        /// List to store all cars / Constants
-        /// </summary>
-        private List<Car> carList = new List<Car>();
-        private const int YEAR_RANGE = 50; 
-        /// <summary>
-        /// Kyle code
-        /// Constructor fir the form.
-        /// </summary>
+        // List to store all vehicles
+        private List<Vehicle> vehicleList = new List<Vehicle>();
+        private const int YEAR_RANGE = 50;
+
         public MainWindow()
         {
             InitializeComponent();
             PopulateYears();
             SetDefaults();
+            UpdateStatus("Program opened.");
         }
+
         /// <summary>
-        /// Kyle code
         /// Populates the year combo box with the last 50 years.
         /// </summary>
         public void PopulateYears()
         {
-            var currentYear = DateTime.Now.Year;
-
+            int currentYear = DateTime.Now.Year;
             for (int year = currentYear; year >= currentYear - YEAR_RANGE; year--)
             {
                 comboYear.Items.Add(year);
             }
         }
+
         /// <summary>
-        /// Kyle code
-        /// Set all form controls back to their default state.
+        /// Sets all form controls back to default state.
         /// </summary>
         public void SetDefaults()
         {
+            comboVehicleType.SelectedIndex = 0; // Car selected by default
             comboMake.SelectedIndex = 0;
             textModel.Clear();
             comboYear.SelectedIndex = 0;
             textPrice.Clear();
             checkIsNew.IsChecked = false;
 
-
             listViewCars.SelectedIndex = -1;
 
+            UnHighlight(comboMake);
             UnHighlight(textModel);
+            UnHighlight(comboYear);
             UnHighlight(textPrice);
 
             comboMake.Focus();
         }
+
         /// <summary>
-        /// Kyle code
-        /// When Reset is clicked, reset stuff.
+        /// Resets the form when Reset button clicked.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ResetClick(object sender, RoutedEventArgs e)
         {
             SetDefaults();
+            UpdateStatus("Form reset.");
         }
+
         /// <summary>
-        /// Kyle code
-        /// Me close form.
+        /// Exits the program when Exit button clicked.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ExitClick(object sender, RoutedEventArgs e)
         {
+            UpdateStatus("Program closed.");
             Close();
         }
 
         /// <summary>
-        /// Updates the list of cars when clicked, by adding a new car or updating an existing car, refreshing list and resetting the form
-        /// Visual Studio Intellisense
+        /// Adds or updates a vehicle when Enter button clicked.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void EnterClick(object sender, RoutedEventArgs e)
         {
-            // Validate the input if false then exit the method
             if (!ValidateInputs(out string make, out string model, out int year, out decimal price, out bool isNew))
                 return;
-            
-            // If no car is selected then Create a new car
-            if (listViewCars.SelectedIndex == -1)
+
+            try
             {
-                Car newCar = new Car(make, model, year, price, isNew);
-                carList.Add(newCar);
-                textOutput.Text = "Car added successfully.";
+                Vehicle vehicle;
+
+                // Determine vehicle type from combo box
+                string type = comboVehicleType.Text;
+                if (listViewCars.SelectedIndex == -1)
+                {
+                    if (type == "Car")
+                        vehicle = new Car(make, model, year, price, isNew);
+                    else
+                        vehicle = new Motorcycle(make, model, year, price, isNew);
+
+                    vehicleList.Add(vehicle);
+                    textOutput.Text = $"{type} added successfully.";
+                    UpdateStatus($"New {type} added.");
+                }
+                else
+                {
+                    vehicle = vehicleList[listViewCars.SelectedIndex];
+                    vehicle.Make = make;
+                    vehicle.Model = model;
+                    vehicle.Year = year;
+                    vehicle.Price = price;
+                    vehicle.IsNew = isNew;
+                    textOutput.Text = $"{vehicle.Type} updated successfully.";
+                    UpdateStatus($"{vehicle.Type} updated.");
+                }
+
+                RefreshList();
+                UpdateStatistics();
+                SetDefaults();
             }
-            else
+            catch (ArgumentNullException ex)
             {
-                Car selectedCar = carList[listViewCars.SelectedIndex];
-                selectedCar.Make = make;
-                selectedCar.Model = model;
-                selectedCar.Year = year;
-                selectedCar.Price = price;
-                selectedCar.IsNew = isNew;
-                textOutput.Text = "Car updated successfully.";
+                textOutput.Text = ex.Message;
+                ErrorHighlight(textModel);
+                UpdateStatus("Error: Model cannot be empty.");
             }
-            RefreshList();
-            SetDefaults();
+            catch (ArgumentOutOfRangeException ex)
+            {
+                textOutput.Text = ex.Message;
+                ErrorHighlight(textPrice);
+                UpdateStatus("Error: Price cannot be negative.");
+            }
+            catch (Exception ex)
+            {
+                textOutput.Text = $"Unexpected error: {ex.Message}";
+                UpdateStatus("Error: Unexpected issue occurred.");
+            }
         }
+
         /// <summary>
-        /// Refreshes the form to list the new cars
+        /// Refreshes the ListView of vehicles.
         /// </summary>
         private void RefreshList()
         {
             listViewCars.Items.Clear();
-            foreach (Car c in carList)
+            foreach (Vehicle v in vehicleList)
             {
-                listViewCars.Items.Add(c);
+                listViewCars.Items.Add(v);
             }
         }
 
         /// <summary>
-        /// Handles Selection changes and populates the form with the car details
+        /// Populates form controls when a vehicle is selected from the list.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-
         private void CarSelect(object sender, SelectionChangedEventArgs e)
         {
             if (listViewCars.SelectedIndex != -1)
             {
-                Car selectedCar = carList[listViewCars.SelectedIndex];
-                comboMake.Text = selectedCar.Make;
-                textModel.Text = selectedCar.Model;
-                comboYear.Text = selectedCar.Year.ToString();
-                textPrice.Text = selectedCar.Price.ToString();
-                checkIsNew.IsChecked = selectedCar.IsNew;
+                Vehicle selectedVehicle = vehicleList[listViewCars.SelectedIndex];
+                comboVehicleType.Text = selectedVehicle.Type;
+                comboMake.Text = selectedVehicle.Make;
+                textModel.Text = selectedVehicle.Model;
+                comboYear.Text = selectedVehicle.Year.ToString();
+                textPrice.Text = selectedVehicle.Price.ToString();
+                checkIsNew.IsChecked = selectedVehicle.IsNew;
+
+                UpdateStatus($"{selectedVehicle.Type} selected from list.");
             }
         }
 
         /// <summary>
-        /// Validates the inputs of the user
+        /// Validates user inputs for vehicle properties.
         /// </summary>
-        /// <param name="make"></param>
-        /// <param name="model"></param>
-        /// <param name="year"></param>
-        /// <param name="price"></param>
-        /// <param name="isNew"></param>
-        /// <returns></returns>
         private bool ValidateInputs(out string make, out string model, out int year, out decimal price, out bool isNew)
         {
             make = comboMake.Text;
             model = textModel.Text;
             isNew = checkIsNew.IsChecked == true;
-
+            year = 0;
+            price = 0;
             textOutput.Text = "";
 
             if (string.IsNullOrWhiteSpace(make))
             {
-                textOutput.Text += "Please select a car.\n";
-                ErrorHighlight(textOutput);
-                year = 0; price = 0; return false;
+                textOutput.Text += "Please select a car make.\n";
+                ErrorHighlight(comboMake);
+                return false;
             }
 
             if (string.IsNullOrWhiteSpace(model))
             {
                 textOutput.Text += "Please enter a valid model.\n";
-                ErrorHighlight(textOutput);
-                year = 0; price = 0; return false;
+                ErrorHighlight(textModel);
+                return false;
             }
 
             if (comboYear.SelectedItem == null || !int.TryParse(comboYear.SelectedItem.ToString(), out year))
             {
                 textOutput.Text += "Please select a valid year.\n";
-                ErrorHighlight(textOutput);
-                year = 0; price = 0; return false;
+                ErrorHighlight(comboYear);
+                return false;
             }
 
             if (!decimal.TryParse(textPrice.Text, NumberStyles.Currency | NumberStyles.Number, CultureInfo.CurrentCulture, out price))
             {
                 textOutput.Text += "Please enter a valid price.\n";
-                ErrorHighlight(textOutput);
-                year = 0; price = 0; return false;
+                ErrorHighlight(textPrice);
+                return false;
             }
+
+            if (price < 0)
+                throw new ArgumentOutOfRangeException(nameof(price), "Price cannot be negative.");
+
             return true;
         }
 
+        /// <summary>
+        /// Highlights a control to indicate an error.
+        /// </summary>
         private void ErrorHighlight(Control controlInError)
         {
             controlInError.BorderBrush = Brushes.Red;
@@ -212,15 +233,58 @@ namespace CarList
             }
         }
 
+        /// <summary>
+        /// Removes highlight from a control.
+        /// </summary>
         private void UnHighlight(Control controlToClear)
         {
             controlToClear.BorderBrush = Brushes.Gray;
             controlToClear.Background = Brushes.White;
         }
 
-        private void UpdateStatus(string message) 
+        /// <summary>
+        /// Updates statistics labels.
+        /// </summary>
+        private void UpdateStatistics()
         {
-            statusMessage.Content = $"{DateTime.Now:T} - {message}";
+            int totalVehicles = vehicleList.Count;
+            decimal totalPrice = vehicleList.Sum(v => v.Price);
+            decimal averagePrice = totalVehicles > 0 ? totalPrice / totalVehicles : 0;
+
+            labelTotalVehicles.Content = $"Total Vehicles: {totalVehicles}";
+            labelTotalPrice.Content = $"Total Price: {totalPrice:C}";
+            labelAveragePrice.Content = $"Average Price: {averagePrice:C}";
+        }
+
+        /// <summary>
+        /// Updates the status bar message.
+        /// </summary>
+        private void UpdateStatus(string message)
+        {
+            statusMessage.Text = $"{DateTime.Now:T} - {message}";
+        }
+
+        /// <summary>
+        /// Handles tab selection changes to update the status or statistics.
+        /// </summary>
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (tabControlMain.SelectedItem is TabItem selectedTab)
+            {
+                switch (selectedTab.Header.ToString())
+                {
+                    case "Vehicle List":
+                        UpdateStatus("Vehicle List viewed.");
+                        break;
+                    case "Statistics":
+                        UpdateStatistics();
+                        UpdateStatus("Statistics viewed.");
+                        break;
+                    default:
+                        UpdateStatus("Add Vehicles tab selected.");
+                        break;
+                }
+            }
         }
     }
 }

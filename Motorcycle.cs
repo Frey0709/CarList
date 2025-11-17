@@ -1,60 +1,45 @@
-﻿using CarList;
+﻿// Author: Claude Joeffrey Aldenson R. De Guzman
+// Created: Oct 26, 2025
+// Description: Defines a Motorcycle class that inherits from Vehicle.
+
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarList
 {
     internal class Motorcycle : Vehicle
     {
-        private bool hasSidecar;
-        public Motorcycle() : base()
-        {
-        }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Motorcycle"/> class with specified details.
+        /// Default constructor
+        /// Kyle code
         /// </summary>
-        /// <param name="make">The manufacturer of the motorcycle.</param>
-        /// <param name="model">The model name of the motorcycle.</param>
-        /// <param name="year">The year the motorcycle was manufactured.</param>
-        /// <param name="price">The price of the motorcycle.</param>
-        /// <param name="isNew"><see langword="true"/> if the motorcycle is new; otherwise, <see langword="false"/>.</param>
-        /// <param name="hasSidecar"><see langword="true"/> if the motorcycle has a sidecar; otherwise, <see langword="false"/>.</param>
-        public Motorcycle(string make, string model, int year, decimal price, bool isNew, bool hasSidecar)
-            : base()
+        public Motorcycle() : base() { }
+
+        /// <summary>
+        /// Parametrized constructor
+        /// Kyle code
+        /// </summary>
+        public Motorcycle(string make, string model, int year, decimal price, bool isNew)
         {
             Make = make;
             Model = model;
             Year = year;
             Price = price;
             IsNew = isNew;
-            this.hasSidecar = hasSidecar;
         }
+
         /// <summary>
-        /// Gets or sets a value indicating whether the vehicle has a sidecar.
+        /// Vehicle type
+        /// Kyle code
         /// </summary>
-        public bool HasSidecar
-        {
-            get
-            {
-                return hasSidecar;
-            }
-            set
-            {
-                hasSidecar = value;
-            }
-        }
+        public override string Type => "Motorcycle";
+
         /// <summary>
-        /// Emits a honking sound to signal or alert others.
+        /// Motorcycle-specific honk
+        /// Kyle code
         /// </summary>
-        /// <remarks>This method outputs a predefined honking sound to the console. It can be used in
-        /// scenarios where an audible alert is needed.</remarks>
-        public void Honk()
+        public override string Honk()
         {
-            Console.WriteLine("Beep Beep!");
+            return "Motorcycle goes vroom!";
         }
     }
 }
