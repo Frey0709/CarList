@@ -18,9 +18,9 @@ namespace CarList
         protected int year = DateTime.Now.Year;
         protected decimal price = 0.0M;
         protected bool isNew = false;
-        protected int id = count;
 
         private static int count = 0;
+        protected int id = count;
 
         /// <summary>
         /// A default constructor

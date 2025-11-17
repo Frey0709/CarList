@@ -1,4 +1,4 @@
-﻿// Author: Claude Joeffrey Aldenson R. De Guzman
+﻿// Author: Claude Joeffrey Aldenson R. De Guzman | Kyle Chapman
 // Created: Oct 26, 2025
 // Description: Backend of the Car Inventory application, that will handle events and methods for user inputs and displaying them.
 
@@ -63,6 +63,9 @@ namespace CarList
 
 
             listViewCars.SelectedIndex = -1;
+
+            UnHighlight(textModel);
+            UnHighlight(textPrice);
 
             comboMake.Focus();
         }
@@ -170,27 +173,49 @@ namespace CarList
             if (string.IsNullOrWhiteSpace(make))
             {
                 textOutput.Text += "Please select a car.\n";
+                ErrorHighlight(textOutput);
                 year = 0; price = 0; return false;
             }
 
             if (string.IsNullOrWhiteSpace(model))
             {
                 textOutput.Text += "Please enter a valid model.\n";
+                ErrorHighlight(textOutput);
                 year = 0; price = 0; return false;
             }
 
             if (comboYear.SelectedItem == null || !int.TryParse(comboYear.SelectedItem.ToString(), out year))
             {
                 textOutput.Text += "Please select a valid year.\n";
+                ErrorHighlight(textOutput);
                 year = 0; price = 0; return false;
             }
 
             if (!decimal.TryParse(textPrice.Text, NumberStyles.Currency | NumberStyles.Number, CultureInfo.CurrentCulture, out price))
             {
                 textOutput.Text += "Please enter a valid price.\n";
+                ErrorHighlight(textOutput);
                 year = 0; price = 0; return false;
             }
             return true;
+        }
+
+        private void ErrorHighlight(TextBox boxinError)
+        {
+            boxinError.BorderBrush = Brushes.Red;
+            boxinError.Background = Brushes.MistyRose;
+            boxinError.SelectAll();
+            boxinError.Focus();
+        }
+
+        private void UnHighlight(TextBox boxtoClear)
+        {
+            boxtoClear.BorderBrush = textOutput.BorderBrush;
+            boxtoClear.Background = Brushes.LightGray;
+        }
+        private void UpdateStatus(string message) 
+        {
+            labelStatus.Content = $"{DateTime.Now:T} - {message}";
         }
     }
 }
