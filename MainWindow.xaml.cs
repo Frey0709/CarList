@@ -180,14 +180,15 @@ namespace CarList
             make = comboMake.Text;
             model = textModel.Text;
             isNew = checkIsNew.IsChecked == true;
-            year = 0;
-            price = 0;
+
             textOutput.Text = "";
 
             if (string.IsNullOrWhiteSpace(make))
             {
                 textOutput.Text += "Please select a car make.\n";
                 ErrorHighlight(comboMake);
+                year = 0;
+                price = 0;
                 return false;
             }
 
@@ -195,6 +196,8 @@ namespace CarList
             {
                 textOutput.Text += "Please enter a valid model.\n";
                 ErrorHighlight(textModel);
+                year = 0;
+                price = 0;
                 return false;
             }
 
@@ -202,6 +205,8 @@ namespace CarList
             {
                 textOutput.Text += "Please select a valid year.\n";
                 ErrorHighlight(comboYear);
+                year = 0;
+                price = 0;
                 return false;
             }
 
@@ -209,14 +214,19 @@ namespace CarList
             {
                 textOutput.Text += "Please enter a valid price.\n";
                 ErrorHighlight(textPrice);
+                year = 0;
+                price = 0;
                 return false;
             }
 
             if (price < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(price), "Price cannot be negative.");
+            }
 
             return true;
         }
+
 
         /// <summary>
         /// Highlights a control to indicate an error.
