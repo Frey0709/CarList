@@ -200,22 +200,27 @@ namespace CarList
             return true;
         }
 
-        private void ErrorHighlight(TextBox boxinError)
+        private void ErrorHighlight(Control controlInError)
         {
-            boxinError.BorderBrush = Brushes.Red;
-            boxinError.Background = Brushes.MistyRose;
-            boxinError.SelectAll();
-            boxinError.Focus();
+            controlInError.BorderBrush = Brushes.Red;
+            controlInError.Background = Brushes.MistyRose;
+            controlInError.Focus();
+
+            if (controlInError is TextBox tb)
+            {
+                tb.SelectAll();
+            }
         }
 
-        private void UnHighlight(TextBox boxtoClear)
+        private void UnHighlight(Control controlToClear)
         {
-            boxtoClear.BorderBrush = textOutput.BorderBrush;
-            boxtoClear.Background = Brushes.LightGray;
+            controlToClear.BorderBrush = Brushes.Gray;
+            controlToClear.Background = Brushes.White;
         }
+
         private void UpdateStatus(string message) 
         {
-            labelStatus.Content = $"{DateTime.Now:T} - {message}";
+            statusMessage.Content = $"{DateTime.Now:T} - {message}";
         }
     }
 }
