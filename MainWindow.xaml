@@ -12,7 +12,7 @@
         <TabControl x:Name="tabControlMain" SelectionChanged="TabControl_SelectionChanged" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
             <!-- Tab 1: Add Vehicles -->
-            <TabItem Header="Add Vehicles">
+            <TabItem Header="Add Vehicles" TabIndex="1" ToolTip="Add vehicles tab">
                 <StackPanel Margin="10">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -30,14 +30,14 @@
 
                         <!-- Vehicle Type -->
                         <Label Content="_Type:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="comboVehicleType" Grid.Row="0" Grid.Column="1" Width="120" Margin="5" SelectedIndex="0" ToolTip="Select the type of vehicle">
+                        <ComboBox x:Name="comboVehicleType" Grid.Row="0" Grid.Column="1" Width="120" Margin="5" SelectedIndex="0" ToolTip="Select the type of vehicle" TabIndex="4">
                             <ComboBoxItem Content="Car"/>
                             <ComboBoxItem Content="Motorcycle"/>
                         </ComboBox>
 
                         <!-- Make -->
                         <Label Content="_Make:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="comboMake" Grid.Row="1" Grid.Column="1" Width="120" Margin="5" ToolTip="Select the manufacturer of the vehicle">
+                        <ComboBox x:Name="comboMake" Grid.Row="1" Grid.Column="1" Width="120" Margin="5" ToolTip="Select the manufacturer of the vehicle" TabIndex="5">
                             <ComboBoxItem Content="BMW"/>
                             <ComboBoxItem Content="Honda"/>
                             <ComboBoxItem Content="Hyundai"/>
@@ -53,25 +53,25 @@
 
                         <!-- Model -->
                         <Label Content="M_odel:" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <TextBox x:Name="textModel" Grid.Row="2" Grid.Column="1" Margin="5" ToolTip="Enter the model of the vehicle"/>
+                        <TextBox x:Name="textModel" Grid.Row="2" Grid.Column="1" Margin="5" Width="120" ToolTip="Enter the model of the vehicle" TabIndex="6"/>
 
                         <!-- Year -->
                         <Label Content="_Year:" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <ComboBox x:Name="comboYear" Grid.Row="3" Grid.Column="1" Width="120" Margin="5" ToolTip="Select the year of the vehicle"/>
+                        <ComboBox x:Name="comboYear" Grid.Row="3" Grid.Column="1" Width="120" Margin="5" ToolTip="Select the year of the vehicle" TabIndex="7"/>
 
                         <!-- Price -->
                         <Label Content="_Price:" Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <TextBox x:Name="textPrice" Grid.Row="4" Grid.Column="1" Margin="5" ToolTip="Enter the price of the vehicle"/>
+                        <TextBox x:Name="textPrice" Grid.Row="4" Grid.Column="1" Margin="5" Width="120" ToolTip="Enter the price of the vehicle" TabIndex="8"/>
 
                         <!-- Is New -->
-                        <CheckBox x:Name="checkIsNew" Grid.Row="5" Grid.Column="1" Content="_New?" HorizontalAlignment="Left" Margin="5"/>
+                        <CheckBox x:Name="checkIsNew" Grid.Row="5" Grid.Column="1" Content="_New?" HorizontalAlignment="Left" Margin="5" TabIndex="9" ToolTip="Is it new?"/>
                     </Grid>
 
                     <!-- Buttons -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                        <Button x:Name="buttonEnter" Content="_Enter" MinWidth="60" Margin="5" Click="EnterClick" ToolTip="Click to enter your vehicle"/>
-                        <Button x:Name="buttonReset" Content="_Reset" MinWidth="60" Margin="5" Click="ResetClick" ToolTip="Click to reset the form"/>
-                        <Button x:Name="buttonExit" Content="E_xit" MinWidth="60" Margin="5" Click="ExitClick" ToolTip="Click to exit the program"/>
+                        <Button x:Name="buttonEnter" Content="_Enter" MinWidth="60" Margin="5" Click="EnterClick" ToolTip="Click to enter your vehicle" TabIndex="10"/>
+                        <Button x:Name="buttonReset" Content="_Reset" MinWidth="60" Margin="5" Click="ResetClick" ToolTip="Click to reset the form" TabIndex="11"/>
+                        <Button x:Name="buttonExit" Content="E_xit" MinWidth="60" Margin="5" Click="ExitClick" ToolTip="Click to exit the program" TabIndex="12"/>
                     </StackPanel>
 
                     <!-- Output box for messages -->
@@ -80,7 +80,7 @@
             </TabItem>
 
             <!-- Tab 2: Vehicle List -->
-            <TabItem Header="Vehicle List">
+            <TabItem Header="Vehicle List" TabIndex="2" ToolTip="See vehicle list">
                 <ListView x:Name="listViewCars" Margin="5" MinHeight="150" SelectionChanged="CarSelect">
                     <ListView.View>
                         <GridView>
@@ -97,7 +97,7 @@
             </TabItem>
 
             <!-- Tab 3: Statistics -->
-            <TabItem Header="Statistics">
+            <TabItem Header="Statistics" TabIndex="3" ToolTip="Stats for your vehicles">
                 <StackPanel Margin="10">
                     <Label x:Name="labelTotalVehicles" Content="Total Vehicles: 0" Margin="3"/>
                     <Label x:Name="labelTotalPrice" Content="Total Price: $0" Margin="3"/>
