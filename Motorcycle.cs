@@ -1,5 +1,6 @@
 ﻿// Author: Claude Joeffrey Aldenson R. De Guzman
 // Created: Oct 26, 2025
+// Updated: Nov 16, 2025
 // Description: Defines a Motorcycle class that inherits from Vehicle.
 
 using System;

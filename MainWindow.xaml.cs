@@ -1,5 +1,6 @@
 ﻿// Author: Claude Joeffrey Aldenson R. De Guzman | Kyle Chapman
 // Created: Oct 26, 2025
+// Updated: Nov 16, 2025
 // Description: Backend of the Car Inventory application, that handles events and methods for user inputs and displaying them.
 
 using System;
